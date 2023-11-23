@@ -5,19 +5,11 @@ export class AuthService {
 
   private static instance: AuthService
 
-  async requestCredentials(code: string): Promise<string> {
-    const response = await axios.post("https://cors-anywhere.herokuapp.com/https://github.com/login/oauth/access_token", {
-      client_id: import.meta.env.VITE_CLIENT_ID,
-      client_secret: import.meta.env.VITE_CLIENT_SECRET,
-      code,
-    }, {
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        'Access-Control-Allow-Origin': '*',
-      },
-    })
-    return response.data.access_token
+  async requestCredentials(code: string): Promise<string> { //https://github.com/login/oauth/access_token
+    //https://cors-anywhere.herokuapp.com/
+    const response = await axios.get(`http://localhost:8080/api/login/${code}`)
+
+    return response.data.token
   }
 
   async requestUserDetails(token: string): Promise<IUserDTO> {

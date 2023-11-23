@@ -1,0 +1,59 @@
+@import "../../css/variables";
+
+.container__chip {
+  padding: 2px 7px;
+  outline: 1px solid;
+  font-size: 0.75rem;
+  border-radius: 16px;
+
+  transition: background 0.3s linear;
+  cursor: default;
+}
+
+.chip__outline__red {
+  outline-color: $alert;
+
+  &:hover {
+    background: transparentize($alert, 0.9);
+  }
+}
+.chip__outline__blue {
+  outline-color: $blueLightText;
+
+  &:hover {
+    background: transparentize($blueLightText, 0.8);
+  }
+}
+.chip__outline__purple {
+  outline-color: $purplerDark;
+
+  &:hover {
+    background: transparentize($purplerDark, 0.9);
+  }
+}
+
+.chip__fill__red {
+  background: $alert;
+  outline-color: $alert;
+
+  &:hover {
+    background: transparentize($alert, 0.9);
+  }
+}
+
+.chip__fill__blue {
+  background: $blueLightText;
+  outline-color: $blueLightText;
+
+  &:hover {
+    background: transparentize($blueLightText, 0.9);
+  }
+}
+.chip__fill__purple {
+  background: $purplerDark;
+  outline-color: $purplerDark;
+
+  &:hover {
+    background: transparentize($purplerDark, 0.9);
+  }
+}

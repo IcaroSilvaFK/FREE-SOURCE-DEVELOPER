@@ -1,13 +1,17 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { FaGithub } from "react-icons/fa";
 
-import { useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { authService } from "../../services/auth.service";
 import { userStore } from "../../store/user.store";
 import styles from "./styles.module.scss";
 
 export function LoginPage() {
-  const { user } = userStore((state) => state);
+  const { user, setUser } = userStore((state) => state);
   const navigator = useNavigate();
+
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -16,9 +20,35 @@ export function LoginPage() {
   }, [user, navigator]);
 
   function handleSignInWithGithub() {
-    window.location.href =
-      "https://github.com/login/oauth/authorize?client_id=59928a2b5e7e2e57d58a";
+    const randomState = window.crypto.randomUUID();
+
+    window.location.href = `https://github.com/login/oauth/authorize?client_id=59928a2b5e7e2e57d58a&state=${randomState}&scope=user`;
   }
+
+  const handleGetUserInfos = useCallback(async () => {
+    try {
+      const code = new URLSearchParams(window.location.search).get("code");
+      if (!code) {
+        return;
+      }
+      console.count("handleGetUserInfos");
+      setIsLoading(true);
+      const token = await authService.requestCredentials(code);
+
+      const user = await authService.requestUserDetails(token);
+
+      setUser(user);
+      navigator("/home");
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [setUser]);
+
+  useEffect(() => {
+    handleGetUserInfos();
+  }, []);
 
   return (
     <main className={styles.container__main}>
@@ -28,9 +58,15 @@ export function LoginPage() {
           <span>DEV</span>
         </h1>
 
-        <button onClick={handleSignInWithGithub}>
-          <span>Entrar com o github</span>
-          <FaGithub size={32} />
+        <button onClick={handleSignInWithGithub} disabled={isLoading}>
+          {!isLoading && (
+            <>
+              <span>Entrar com o github</span>
+              <FaGithub size={32} />
+            </>
+          )}
+
+          {isLoading && <img src="/assets/loading.svg" />}
         </button>
       </div>
     </main>

@@ -1,0 +1,61 @@
+@import "../../css/variables";
+
+.container__card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  border: 1px solid $darkPrimary;
+  box-shadow: 0 0 2px rgba(255, 255, 255, 0.1);
+  padding: 12px;
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+
+    img {
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+    }
+
+    > div {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      > div {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+
+        span {
+          font-size: 0.75rem;
+          color: $lightGray;
+        }
+      }
+    }
+  }
+
+  > p {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: $lightGray;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  footer {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    ul {
+      display: flex;
+      gap: 6px;
+    }
+  }
+}

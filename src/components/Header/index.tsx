@@ -1,5 +1,8 @@
 import { LuXCircle } from "react-icons/lu";
+
 import { userStore } from "../../store/user.store";
+
+import { Tooltip } from "../Tooltip";
 import styles from "./styles.module.scss";
 
 export function Header() {
@@ -16,9 +19,11 @@ export function Header() {
             <strong>{user.name}</strong>
             <p>{user?.company}</p>
           </div>
-          <button>
-            <LuXCircle size={22} />
-          </button>
+          <Tooltip content="Sair">
+            <button>
+              <LuXCircle size={22} />
+            </button>
+          </Tooltip>
         </div>
       )}
     </header>

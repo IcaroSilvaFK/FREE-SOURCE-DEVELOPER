@@ -3,4 +3,31 @@
 .container__home {
   display: flex;
   flex-direction: column;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  h1 {
+    font-size: 1.75rem;
+    position: relative;
+    max-width: fit-content;
+
+    &::after {
+      content: "";
+      position: absolute;
+      width: 50%;
+      height: 4px;
+      background: $purplerDark;
+
+      bottom: -10px;
+      left: 0;
+    }
+  }
+
+  > ul {
+    margin-top: 22px;
+    display: grid;
+
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+  }
 }
