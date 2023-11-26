@@ -1,15 +1,17 @@
 import { create } from 'zustand'
-import { devtools, persist } from 'zustand/middleware'
+import { createJSONStorage, devtools, persist } from 'zustand/middleware'
 import { IUserDTO } from '../interfaces/UserDTO'
 
 type UserStoreProps = {
   user: IUserDTO | null
   setUser: (user: IUserDTO) => void
   removeUser: () => void
+  createdAt: Date
 }
 
 export const userStore = create<UserStoreProps>()(devtools(persist(set => ({
   user: null,
+  createdAt: new Date(),
   setUser(user) {
     set(state => ({ ...state, user }))
   },
@@ -17,5 +19,6 @@ export const userStore = create<UserStoreProps>()(devtools(persist(set => ({
     set(state => ({ ...state, user: null }))
   },
 }), {
-  name: "@user-storage"
+  name: "@user-storage",
+  storage: createJSONStorage(() => sessionStorage)
 })))

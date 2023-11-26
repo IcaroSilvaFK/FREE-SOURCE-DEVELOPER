@@ -1,0 +1,13 @@
+@import "../../css/variables";
+
+.container__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    color: $lightGray;
+    width: 24px;
+    height: 24px;
+  }
+}

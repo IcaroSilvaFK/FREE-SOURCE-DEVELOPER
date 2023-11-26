@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import styles from "./styles.module.scss";
 
 type Props = {
@@ -9,7 +10,7 @@ type Props = {
 export function Chip(props: Props) {
   const { label, type, color } = props;
 
-  const classCustom = `chip__${type}__${color}`;
+  const classCustom = useMemo(() => `chip__${type}__${color}`, [type, color]);
 
   return (
     <span className={`${styles.container__chip} ${styles[classCustom]}`}>

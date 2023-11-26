@@ -1,0 +1,55 @@
+@import "../../css/variables";
+
+.container__project {
+  display: flex;
+  flex-direction: column;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  > nav {
+    padding: 12px 0;
+    > ul {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+
+      > li {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+
+        color: $gray;
+
+        a {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          color: $whitePrimary;
+        }
+      }
+    }
+  }
+
+  section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    :global .wmde-markdown {
+      background: transparent;
+    }
+
+    ul {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+  }
+}

@@ -1,34 +1,36 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect } from "react";
 import { useLoaderData } from "react-router-dom";
-
-import { IUserDTO } from "../../interfaces/UserDTO";
-import { userStore } from "../../store/user.store";
 
 import { Header } from "../../components/Header";
 
 import { CardProject } from "../../components/CardProject";
 
+import { LuPlus } from "react-icons/lu";
+import { Button } from "../../components/Button";
+import { ModalCreateNewProject } from "../../components/ModalCreateNewProject";
+import { Output } from "../../services/project.service";
 import styles from "./styles.module.scss";
 
 export function HomePage() {
-  const data = useLoaderData() as unknown as IUserDTO;
-  const { setUser } = userStore((state) => state);
-
-  useEffect(() => {
-    if (data) {
-      setUser(data);
-    }
-  }, [data]);
+  const projects = useLoaderData() as unknown as Output[];
 
   return (
     <>
       <Header />
       <main className={styles.container__home}>
-        <h1>Projetos</h1>
+        <header>
+          <h1>Projetos</h1>
+          <ModalCreateNewProject>
+            <Button variant="outline" color="blue">
+              Criar
+              <LuPlus />
+            </Button>
+          </ModalCreateNewProject>
+        </header>
+
         <ul>
-          {Array.from({ length: 100 }).map(() => (
-            <CardProject />
+          {projects?.map((project) => (
+            <CardProject key={project.id} {...project} />
           ))}
         </ul>
       </main>

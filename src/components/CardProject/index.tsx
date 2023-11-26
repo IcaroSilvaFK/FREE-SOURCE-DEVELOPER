@@ -1,45 +1,46 @@
-import { userStore } from "../../store/user.store";
+import { useNavigate } from "react-router-dom";
+import { Output } from "../../services/project.service";
 import { formatPassedToNow } from "../../utils/formatPassedToNow";
+import { Button } from "../Button";
 import { Chip } from "../Chip";
 
 import styles from "./styles.module.scss";
 
-const tecs = ["TypeScript", "React", "Next", "Node"];
+export function CardProject(props: Output) {
+  const { project_name, tecs, user, created_at, id } = props;
 
-export function CardProject() {
-  const { user } = userStore((state) => state);
+  const navigator = useNavigate();
 
-  const date = new Date();
+  const date = new Date(created_at);
 
-  const passedDate = date.setDate(date.getDate() - Math.random() * 30);
-  const castingToDate = new Date(passedDate);
-  const passed = formatPassedToNow(castingToDate);
+  const passed = formatPassedToNow(date);
+
+  function navigateToDetails() {
+    navigator(`/project/${id}`);
+  }
 
   return (
     <li className={styles.container__card}>
       <header>
         <div>
-          <img src={user?.avatar_url} alt={user?.name} />
+          <img src={user?.avatar_url} alt={user?.username} />
           <div>
-            <strong>{user?.name}</strong>
+            <strong>{user?.username}</strong>
             <span>{passed}</span>
           </div>
         </div>
-        <Chip color="purple" label="front-end" type="outline" />
+        <Chip color="red" label="front-end" type="outline" />
       </header>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum
-        perferendis ipsa sunt tempora possimus animi nihil enim quos esse est,
-        dolore earum doloribus doloremque recusandae iusto fuga voluptates nulla
-        voluptate.
-      </p>
+      <p>{project_name}</p>
       <footer>
         <ul>
           {tecs.map((tec) => (
             <Chip color="blue" label={tec} type="outline" key={tec} />
           ))}
         </ul>
-        <button>Detalhes</button>
+        <Button variant="outline" color="purple" onClick={navigateToDetails}>
+          Detalhes
+        </Button>
       </footer>
     </li>
   );

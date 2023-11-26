@@ -6,7 +6,7 @@ import { Tooltip } from "../Tooltip";
 import styles from "./styles.module.scss";
 
 export function Header() {
-  const { user } = userStore((state) => state);
+  const { user, removeUser } = userStore((state) => state);
 
   return (
     <header className={styles.container__header}>
@@ -20,7 +20,7 @@ export function Header() {
             <p>{user?.company}</p>
           </div>
           <Tooltip content="Sair">
-            <button>
+            <button onClick={removeUser}>
               <LuXCircle size={22} />
             </button>
           </Tooltip>

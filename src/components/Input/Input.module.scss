@@ -1,0 +1,20 @@
+@import "../../css/variables";
+
+.input {
+  outline: none;
+  border: none;
+
+  height: 36px;
+  width: 100%;
+  flex: 1;
+  font-size: 1rem;
+  color: $whitePrimary;
+  background: transparent;
+
+  &::placeholder {
+    color: $lightGray;
+  }
+  &:focus {
+    box-shadow: none;
+  }
+}

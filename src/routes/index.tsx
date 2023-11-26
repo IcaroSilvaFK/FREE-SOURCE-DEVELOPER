@@ -1,26 +1,49 @@
-import { createBrowserRouter } from "react-router-dom";
+import { Outlet, createBrowserRouter } from "react-router-dom";
+import { AuthContextProvider } from "../context/AuthContext";
 import { HomePage } from "../pages/Home";
 import { LoginPage } from "../pages/Login";
-import { authService } from "../services/auth.service";
+import { Project } from "../pages/Project";
+import { projectService } from "../services/project.service";
 
 export const router = createBrowserRouter([
   {
-    index: true,
-    element: <LoginPage />,
-  },
-  {
-    path: "/home",
-    element: <HomePage />,
-    loader: async ({ request }) => {
-      const url = request.url;
-      const code = new URL(url).searchParams.get("code");
+    path: "/",
+    element: (
+      <AuthContextProvider>
+        <Outlet />
+      </AuthContextProvider>
+    ),
+    children: [
+      {
+        index: true,
+        element: <LoginPage />,
+      },
+      {
+        path: "/home",
+        element: <HomePage />,
+        loader: async () => {
+          const data = await projectService.getAllProjects();
 
-      if (!code) return null;
+          return data;
+        },
+        shouldRevalidate: ({ formAction }) => {
+          console.log({ formAction });
+          return true;
+        },
+      },
+      {
+        path: "/project/:id",
+        element: <Project />,
+        loader: async ({ params }) => {
+          const { id } = params as {
+            id: string;
+          };
 
-      const token = await authService.requestCredentials(code);
-      const user = await authService.requestUserDetails(token);
+          const data = await projectService.getProjectById(id);
 
-      return user;
-    },
+          return data;
+        },
+      },
+    ],
   },
 ]);

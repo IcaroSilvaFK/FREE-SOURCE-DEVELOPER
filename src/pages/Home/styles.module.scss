@@ -6,20 +6,26 @@
   max-width: 1200px;
   margin: 0 auto;
 
-  h1 {
-    font-size: 1.75rem;
-    position: relative;
-    max-width: fit-content;
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-    &::after {
-      content: "";
-      position: absolute;
-      width: 50%;
-      height: 4px;
-      background: $purplerDark;
+    h1 {
+      font-size: 1.75rem;
+      position: relative;
+      max-width: fit-content;
 
-      bottom: -10px;
-      left: 0;
+      &::after {
+        content: "";
+        position: absolute;
+        width: 50%;
+        height: 4px;
+        background: $purplerDark;
+
+        bottom: -10px;
+        left: 0;
+      }
     }
   }
 

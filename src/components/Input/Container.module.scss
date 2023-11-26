@@ -1,0 +1,14 @@
+@import "../../css/variables";
+
+.container__input {
+  display: flex;
+  gap: 4px;
+
+  border: 1px solid $lightGray;
+  border-radius: 4px;
+  padding: 4px 8px;
+
+  &:focus-within {
+    border-color: $purplerDark;
+  }
+}
