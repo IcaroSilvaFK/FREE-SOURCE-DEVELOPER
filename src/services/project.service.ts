@@ -35,7 +35,7 @@ class ProjectService {
   private static instance: ProjectService
   private notificationService: NotificationService
   private readonly axiosInstance = axios.create({
-    baseURL: `${import.meta.env.BACKEND_URL}/api`
+    baseURL: `${import.meta.env.VITE_BACKEND_URL}/api`
   })
 
   private constructor(notificationService: NotificationService) {

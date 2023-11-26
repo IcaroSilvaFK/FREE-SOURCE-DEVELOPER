@@ -7,7 +7,7 @@ export class AuthService {
 
   async requestCredentials(code: string): Promise<string> { //https://github.com/login/oauth/access_token
     //https://cors-anywhere.herokuapp.com/
-    const response = await axios.get(`${import.meta.env.BACKEND_URL}/api/login/${code}`)
+    const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/login/${code}`)
 
     return response.data.token
   }
