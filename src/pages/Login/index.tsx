@@ -22,7 +22,9 @@ export function LoginPage() {
   function handleSignInWithGithub() {
     const randomState = window.crypto.randomUUID();
 
-    window.location.href = `https://github.com/login/oauth/authorize?client_id=e9ebf1d6b079f3c2b892&state=${randomState}&scope=user`;
+    window.location.href = `https://github.com/login/oauth/authorize?client_id=${
+      import.meta.env.VITE_CLIENT_ID
+    }&state=${randomState}&scope=user`;
   }
 
   const handleGetUserInfos = useCallback(async () => {
