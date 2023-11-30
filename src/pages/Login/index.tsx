@@ -40,7 +40,7 @@ export function LoginPage() {
       const user = await authService.requestUserDetails(token);
 
       setUser(user);
-      navigator("/home");
+      navigator("/app/home");
     } catch (err) {
       console.log(err);
     } finally {

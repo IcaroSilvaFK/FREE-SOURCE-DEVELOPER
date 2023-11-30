@@ -1,13 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useLoaderData } from "react-router-dom";
-
-import { Header } from "../../components/Header";
+import { Link, useLoaderData } from "react-router-dom";
 
 import { CardProject } from "../../components/CardProject";
 
 import { LuPlus } from "react-icons/lu";
-import { Button } from "../../components/Button";
-import { ModalCreateNewProject } from "../../components/ModalCreateNewProject";
 import { Output } from "../../services/project.service";
 import styles from "./styles.module.scss";
 
@@ -16,16 +12,13 @@ export function HomePage() {
 
   return (
     <>
-      <Header />
-      <main className={styles.container__home}>
+      <section className={styles.container__home}>
         <header>
           <h1>Projetos</h1>
-          <ModalCreateNewProject>
-            <Button variant="outline" color="blue">
-              Criar
-              <LuPlus />
-            </Button>
-          </ModalCreateNewProject>
+          <Link to="/app/project/create">
+            <LuPlus fontWeight="bold" size={20} />
+            <span>Novo Projeto</span>
+          </Link>
         </header>
 
         <ul>
@@ -33,7 +26,7 @@ export function HomePage() {
             <CardProject key={project.id} {...project} />
           ))}
         </ul>
-      </main>
+      </section>
     </>
   );
 }

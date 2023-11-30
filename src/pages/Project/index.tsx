@@ -2,8 +2,8 @@ import MarkdownPreview from "@uiw/react-markdown-preview";
 import { FaHouseUser } from "react-icons/fa6";
 import { FiLink } from "react-icons/fi";
 import { Link, useLoaderData } from "react-router-dom";
+import * as Breadcrumbs from "../../components/Breadcrumbs";
 
-import { Header } from "../../components/Header";
 import { Output } from "../../services/project.service";
 
 import { Chip } from "../../components/Chip";
@@ -14,21 +14,16 @@ export function Project() {
 
   return (
     <main className={styles.container__project}>
-      <Header />
-      <nav>
-        <ul>
-          <li>
-            <Link to="/home">
-              <FaHouseUser />
-              <span>Home</span>
-            </Link>
-          </li>
-          <li>/</li>
-          <li>
-            <span>{data?.project_name}</span>
-          </li>
-        </ul>
-      </nav>
+      <Breadcrumbs.Container>
+        <Breadcrumbs.Item isActive>
+          <Link to="/app/home">
+            <FaHouseUser />
+            <span>Home</span>
+          </Link>
+        </Breadcrumbs.Item>
+        <Breadcrumbs.Item>{data?.project_name}</Breadcrumbs.Item>
+      </Breadcrumbs.Container>
+
       <section>
         <header>
           <h1>{data?.project_name}</h1>

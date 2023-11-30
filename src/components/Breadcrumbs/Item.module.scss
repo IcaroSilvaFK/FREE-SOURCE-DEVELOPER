@@ -1,0 +1,19 @@
+@import "../.././css/variables";
+
+.breadcrumb__item {
+  color: $gray;
+  display: flex;
+
+  * {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+}
+
+.breadcrumb__item__active {
+  color: $lightGray;
+  &:hover span {
+    text-decoration: underline;
+  }
+}

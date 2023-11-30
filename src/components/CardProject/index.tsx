@@ -16,7 +16,7 @@ export function CardProject(props: Output) {
   const passed = formatPassedToNow(date);
 
   function navigateToDetails() {
-    navigator(`/project/${id}`);
+    navigator(`/app/project/${id}`);
   }
 
   return (

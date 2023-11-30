@@ -27,6 +27,25 @@
         left: 0;
       }
     }
+
+    a {
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      color: $whitePrimary;
+
+      background-color: $purplerDark;
+      padding: 4px 12px;
+      border-radius: 2px;
+
+      transition: all linear 0.3s;
+
+      &:hover {
+        background-color: darken($purplerDark, 4%);
+      }
+    }
   }
 
   > ul {

@@ -1,0 +1,19 @@
+@import "../.././css/variables";
+
+.container__breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  > li {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+
+    &:not(:last-child)::after {
+      content: "/";
+      color: $gray;
+      margin-left: 4px;
+    }
+  }
+}
