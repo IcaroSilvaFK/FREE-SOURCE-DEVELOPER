@@ -15,7 +15,7 @@ export function LoginPage() {
 
   useEffect(() => {
     if (user) {
-      navigator("/home");
+      navigator("/app/home");
     }
   }, [user, navigator]);
 
@@ -33,7 +33,7 @@ export function LoginPage() {
       if (!code) {
         return;
       }
-      console.count("handleGetUserInfos");
+
       setIsLoading(true);
       const token = await authService.requestCredentials(code);
 
