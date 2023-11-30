@@ -5,7 +5,7 @@
   flex-direction: column;
   max-width: 1200px;
   margin: 0 auto;
-
+  padding-bottom: 22px;
   > nav {
     padding: 12px 0;
     > ul {
@@ -41,6 +41,14 @@
       gap: 12px;
     }
 
+    .container__stack {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      border-bottom: 1px solid $gray;
+      padding: 12px 0;
+    }
+
     :global .wmde-markdown {
       background: transparent;
     }
@@ -50,6 +58,22 @@
       align-items: center;
       gap: 12px;
       flex-wrap: wrap;
+    }
+
+    > a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 1.125rem;
+      color: $purplerDark;
+      margin-top: 12px;
+
+      transition: color linear 0.3s;
+
+      &:hover {
+        color: $alert;
+      }
     }
   }
 }

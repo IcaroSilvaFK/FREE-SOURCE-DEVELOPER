@@ -53,28 +53,38 @@ export function ModalCreateNewProject(props: Props) {
   });
   const [inputTecValue, setInputTecValue] = useState("");
   const [tecs, setTecs] = useState<Option[]>([]);
+  const [isLoadingCreateNewProject, setIsLoadingCreateNewProject] =
+    useState(false);
 
   const onSubmit = useCallback(
     async (data: FormType) => {
-      await projectService.createProject({
-        title: data.title,
-        description: data.description,
-        link_to_social_media: data.link,
-        project_type: data.type,
-        tecs: tecs.map((tec) => tec.value),
-        user: {
-          email: user?.email || "",
-          avatar_url: user?.avatar_url || "",
-          link_to_profile: user?.url || "",
-          username: user?.name ?? "",
-        },
-      });
-      setTecs([]);
-      reset();
-      console.log({
-        ...data,
-        tecs: tecs.map((tec) => tec.value),
-      });
+      try {
+        setIsLoadingCreateNewProject(true);
+
+        await projectService.createProject({
+          title: data.title,
+          description: data.description,
+          link_to_social_media: data.link,
+          project_type: data.type,
+          tecs: tecs.map((tec) => tec.value),
+          user: {
+            email: user?.email || "",
+            avatar_url: user?.avatar_url || "",
+            link_to_profile: user?.url || "",
+            username: user?.name ?? "",
+          },
+        });
+        setTecs([]);
+        reset();
+        console.log({
+          ...data,
+          tecs: tecs.map((tec) => tec.value),
+        });
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setIsLoadingCreateNewProject(false);
+      }
     },
     [user, reset, tecs]
   );
@@ -111,6 +121,9 @@ export function ModalCreateNewProject(props: Props) {
           </header>
           <form onSubmit={handleSubmit(onSubmit)}>
             <InputRoot.Container>
+              <InputRoot.Label htmlFor="title">
+                Título do projeto
+              </InputRoot.Label>
               <InputRoot.Icon>
                 <MdOutlineTitle />
               </InputRoot.Icon>
@@ -134,6 +147,9 @@ export function ModalCreateNewProject(props: Props) {
               )}
             />
             <InputRoot.Container>
+              <InputRoot.Label htmlFor="title">
+                Link para a comunidade
+              </InputRoot.Label>
               <InputRoot.Icon>
                 <FaLink />
               </InputRoot.Icon>
@@ -145,6 +161,9 @@ export function ModalCreateNewProject(props: Props) {
               />
             </InputRoot.Container>
             <InputRoot.Container>
+              <InputRoot.Label htmlFor="title">
+                Stack usada no projeto
+              </InputRoot.Label>
               <InputRoot.Icon>
                 <FaStackOverflow />
               </InputRoot.Icon>
@@ -179,7 +198,12 @@ export function ModalCreateNewProject(props: Props) {
                   Cancelar
                 </Button>
               </PrimitiveDialog.Close>
-              <Button variant="solid" color="blue" type="submit">
+              <Button
+                variant="solid"
+                color="blue"
+                type="submit"
+                disabled={isLoadingCreateNewProject}
+              >
                 Salvar
               </Button>
             </footer>

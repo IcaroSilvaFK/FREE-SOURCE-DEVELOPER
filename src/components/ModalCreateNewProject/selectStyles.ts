@@ -1,7 +1,7 @@
 import { darken } from 'polished'
-import { CSSObjectWithLabel } from 'react-select'
+import { CSSObjectWithLabel, StylesConfig } from 'react-select'
 
-export const selectStyles = {
+export const selectStyles: StylesConfig = {
   control: (base: CSSObjectWithLabel) => ({
     ...base,
     backgroundColor: "transparent",
@@ -9,7 +9,7 @@ export const selectStyles = {
     borderColor: "#efece6",
     boxShadow: "none",
     "&:hover": {
-      borderColor: darken(0.4, '#efece6'),
+      borderColor: '#7c6483',
     },
   }),
   option: (base: CSSObjectWithLabel) => ({
@@ -33,5 +33,13 @@ export const selectStyles = {
   multiValueLabel: (base: CSSObjectWithLabel) => ({
     ...base,
     color: "#efece6",
-  })
+  }),
+  container(base) {
+    return {
+      ...base,
+      width: '100%',
+      padding: 4,
+      borderColor: '#efece6'
+    }
+  },
 }

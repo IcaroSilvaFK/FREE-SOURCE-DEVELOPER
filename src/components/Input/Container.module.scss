@@ -7,8 +7,14 @@
   border: 1px solid $lightGray;
   border-radius: 4px;
   padding: 4px 8px;
+  position: relative;
 
   &:focus-within {
     border-color: $purplerDark;
+
+    color: $purplerDark;
+    svg {
+      fill: $purplerDark;
+    }
   }
 }

@@ -11,6 +11,11 @@
   border: 0;
 
   transition: all linear 0.3s;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
 }
 
 .button__outline__red {

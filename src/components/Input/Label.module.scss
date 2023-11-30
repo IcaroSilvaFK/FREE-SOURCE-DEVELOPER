@@ -1,0 +1,9 @@
+@import "../../css/variables";
+
+.input__label {
+  position: absolute;
+  top: -10px;
+  left: 12px;
+  background-color: $darkPrimary;
+  padding: 0 6px;
+}
