@@ -1,10 +1,10 @@
-import react from '@vitejs/plugin-react-swc'
-import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import { defineConfig, mergeConfig } from 'vite'
+import vitestConfig from './vitest.config'
 
-// https://vitejs.dev/config/
-export default defineConfig({
+export default mergeConfig(vitestConfig, defineConfig({
   plugins: [react()],
   server: {
     port: 3000
-  }
-})
+  },
+}))

@@ -1,5 +1,4 @@
 import { Outlet, createBrowserRouter } from "react-router-dom";
-import { AuthContextProvider } from "../context/AuthContext";
 import { Layout } from "../layout";
 import { CreateNewProject } from "../pages/CreateNewProject";
 import { HomePage } from "../pages/Home";
@@ -10,11 +9,7 @@ import { projectService } from "../services/project.service";
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: (
-      <AuthContextProvider>
-        <Outlet />
-      </AuthContextProvider>
-    ),
+    element: <Outlet />,
     children: [
       {
         index: true,

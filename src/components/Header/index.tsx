@@ -20,7 +20,7 @@ export function Header() {
             <p>{user?.company}</p>
           </div>
           <Tooltip content="Sair">
-            <button onClick={removeUser}>
+            <button onClick={removeUser} type="button">
               <LuXCircle size={22} />
             </button>
           </Tooltip>

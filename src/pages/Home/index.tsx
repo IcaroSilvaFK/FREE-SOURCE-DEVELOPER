@@ -1,14 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { LuPlus } from "react-icons/lu";
 import { Link, useLoaderData } from "react-router-dom";
 
 import { CardProject } from "../../components/CardProject";
+import { ProjectDTO } from "../../interfaces/ProjectDTO";
 
-import { LuPlus } from "react-icons/lu";
-import { Output } from "../../services/project.service";
 import styles from "./styles.module.scss";
 
 export function HomePage() {
-  const projects = useLoaderData() as unknown as Output[];
+  const projects = useLoaderData() as unknown as ProjectDTO[];
 
   return (
     <>

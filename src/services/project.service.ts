@@ -1,49 +1,21 @@
-import axios from "axios"
-import { NotificationService, notificationService } from "./notifications.service"
+import { AxiosInstance } from "axios"
+import { baseApi } from "../configs/axios"
+import { CreateProjectInput } from "../interfaces/CreateProjectInput"
+import { NotificationServiceInterface } from "../interfaces/NotificationsService"
+import { ProjectDTO } from "../interfaces/ProjectDTO"
+import { notificationService } from "./notifications.service"
 
-type Input = {
-  title: string
-  description: string
-  link_to_social_media: string
-  project_type: string,
-  tecs: string[],
-  user: {
-    email: string
-    avatar_url: string
-    link_to_profile: string
-    username: string
-  }
-}
-
-export type Output = {
-  project_name: string
-  project_description: string
-  link_to_social_media: string
-  id: string
-  project_type: string,
-  tecs: string[],
-  created_at: string
-  user: {
-    email: string
-    avatar_url: string
-    link_to_profile: string
-    username: string
-  }
-}
-
-class ProjectService {
+export class ProjectService {
   private static instance: ProjectService
-  private notificationService: NotificationService
-  private readonly axiosInstance = axios.create({
-    baseURL: `${import.meta.env.VITE_BACKEND_URL}/api`
-  })
+  private notificationService: NotificationServiceInterface
+  readonly axiosInstance: AxiosInstance
 
-  private constructor(notificationService: NotificationService) {
+  private constructor(notificationService: NotificationServiceInterface, axiosInstance: AxiosInstance) {
     this.notificationService = notificationService
-
+    this.axiosInstance = axiosInstance
   }
 
-  async createProject(input: Input) {
+  async createProject(input: CreateProjectInput) {
     try {
 
       const response = await this.axiosInstance.post("/projects", input)
@@ -59,7 +31,7 @@ class ProjectService {
 
   async getAllProjects() {
     try {
-      const response = await this.axiosInstance.get<Output[]>("/projects")
+      const response = await this.axiosInstance.get<ProjectDTO[]>("/projects")
 
       return response.data
     } catch (err) {
@@ -69,7 +41,7 @@ class ProjectService {
 
   async getProjectById(id: string) {
     try {
-      const response = await this.axiosInstance.get<Output>(`/projects/${id}`)
+      const response = await this.axiosInstance.get<ProjectDTO>(`/projects/${id}`)
 
       return response.data
     } catch (err) {
@@ -78,13 +50,15 @@ class ProjectService {
   }
 
 
-  static getInstance(notificationsService: NotificationService) {
+  static getInstance(notificationsService: NotificationServiceInterface, axiosInstance: AxiosInstance) {
     if (!ProjectService.instance) {
-      ProjectService.instance = new ProjectService(notificationsService)
+      ProjectService.instance = new ProjectService(notificationsService, axiosInstance)
     }
     return ProjectService.instance
   }
 }
 
 
-export const projectService = ProjectService.getInstance(notificationService)
+export const projectService = ProjectService.getInstance(notificationService, baseApi)
+
+

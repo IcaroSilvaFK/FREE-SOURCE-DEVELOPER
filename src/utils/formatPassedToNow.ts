@@ -11,5 +11,4 @@ export function formatPassedToNow(date: Date | string) {
     addSuffix: true,
     locale: ptBr
   })
-
 }

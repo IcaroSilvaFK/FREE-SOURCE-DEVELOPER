@@ -4,13 +4,12 @@ import { FiLink } from "react-icons/fi";
 import { Link, useLoaderData } from "react-router-dom";
 import * as Breadcrumbs from "../../components/Breadcrumbs";
 
-import { Output } from "../../services/project.service";
-
 import { Chip } from "../../components/Chip";
+import { ProjectDTO } from "../../interfaces/ProjectDTO";
 import styles from "./styles.module.scss";
 
 export function Project() {
-  const data = useLoaderData() as Output;
+  const data = useLoaderData() as ProjectDTO;
 
   return (
     <main className={styles.container__project}>

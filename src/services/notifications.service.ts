@@ -1,6 +1,7 @@
 import { toast } from 'react-hot-toast'
+import { NotificationServiceInterface } from '../interfaces/NotificationsService'
 
-export class NotificationService {
+export class NotificationService implements NotificationServiceInterface {
   private static instance: NotificationService
 
   private constructor() { }
@@ -22,7 +23,9 @@ export class NotificationService {
   }
 
   info(msg: string) {
-    toast(msg)
+    toast.custom(msg, {
+      icon: "👋",
+    })
   }
 }
 

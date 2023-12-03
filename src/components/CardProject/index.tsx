@@ -1,12 +1,13 @@
 import { useNavigate } from "react-router-dom";
-import { Output } from "../../services/project.service";
+
 import { formatPassedToNow } from "../../utils/formatPassedToNow";
 import { Button } from "../Button";
 import { Chip } from "../Chip";
 
+import { ProjectDTO } from "../../interfaces/ProjectDTO";
 import styles from "./styles.module.scss";
 
-export function CardProject(props: Output) {
+export function CardProject(props: ProjectDTO) {
   const { project_name, tecs, user, created_at, id } = props;
 
   const navigator = useNavigate();
