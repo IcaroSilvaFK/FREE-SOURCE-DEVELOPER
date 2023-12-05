@@ -22,8 +22,6 @@ describe("Notification service test suite", () => {
 
   it("Should success notification", () => {
 
-
-
     notificationService.success("test")
 
     expect(successMock).toHaveBeenCalled()

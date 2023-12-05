@@ -79,6 +79,4 @@ describe("Project service test case suite", () => {
 
     expect(project).toEqual(mockProject)
   })
-
-
 })
